@@ -5,7 +5,7 @@
 :root {    /* 定义变量 */
   --color-text: #666;
   --color-high-text: #ff5777;
-  --color-tint: #ff8198;
+  --color-tint: #ff8198; /* tint表示整体的背景颜色 */
   --color-background: #fff;
   --font-size: 14px;
   --line-height: 1.5;
