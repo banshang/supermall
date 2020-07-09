@@ -2,7 +2,7 @@
   <div id="hy-swiper">
     <div
       class="swiper"
-      @touchStart="touchStart"
+      @touchstart="touchStart"
       @touchmove="touchMove"
       @touchend="touchEnd"
     >
@@ -13,7 +13,7 @@
     <div class="indicator">
       <slot name="indicator" v-if="showIndicator && slideCount > 1">
         <div
-          v-for="(item, index) in slidecount"
+          v-for="(item, index) in slideCount"
           class="indi-item"
           :key="index"
           :class="{ active: index === currentIndex - 1 }"
@@ -165,7 +165,7 @@
       /**
        * 拖动事件处理
        */
-      touchStart() {
+      touchStart(e) {
         // 1. 如果正在滚动，那么不可以拖动
         if (this.scrolling) {
           return
