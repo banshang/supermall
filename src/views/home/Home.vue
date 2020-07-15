@@ -8,13 +8,15 @@
       </template>
     </nav-bar>
     <home-swiper :banners="banners" v-if="banners.length"></home-swiper>
-    <h2 v-else>loading...</h2>
+    <h3 v-else>loading...</h3>
+    <recommend-view :recommends="recommends"></recommend-view>
   </div>
 </template>
 
 <script>
   import NavBar from 'components/common/navbar/NavBar'
   import HomeSwiper from './childComps/HomeSwiper'
+  import RecommendView from './childComps/RecommendView'
 
   import { getHomeMultidata } from 'network/home'
   export default {
@@ -28,7 +30,8 @@
     },
     components: {
       NavBar,
-      HomeSwiper
+      HomeSwiper,
+      RecommendView
     },
     created() {
       // 1.请求多个数据，注意请求数据是异步的，一开始并没有获取到数据，所以传递给homeSwiper的时候，其实还是个空的banners
