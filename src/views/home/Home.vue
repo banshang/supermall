@@ -7,7 +7,8 @@
         </div>
       </template>
     </nav-bar>
-    <home-swiper :banners="banners"></home-swiper>
+    <home-swiper :banners="banners" v-if="banners.length"></home-swiper>
+    <h2 v-else>loading...</h2>
   </div>
 </template>
 
@@ -30,7 +31,7 @@
       HomeSwiper
     },
     created() {
-      // 1.请求多个数据
+      // 1.请求多个数据，注意请求数据是异步的，一开始并没有获取到数据，所以传递给homeSwiper的时候，其实还是个空的banners
       getHomeMultidata().then(res => {
         this.banners = res.data.banner.list //res指向对象 函数执行完之后，变量res会被回收 如果不再有引用，会触发垃圾回收，将返回的对象回收
         // 上面的赋值将res指向的对象的地址赋值给了result，则result指向对象，结果对象仍被引用，所以不会被回收
@@ -44,5 +45,9 @@
   .home-nav {
     background-color: var(--color-tint);
     color: aliceblue;
+  }
+
+  h2 {
+    text-align: center;
   }
 </style>

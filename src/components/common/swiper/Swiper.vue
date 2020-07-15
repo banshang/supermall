@@ -48,6 +48,12 @@
         type: Boolean,
         default: true
       }
+      // banners: {
+      //   type: Array,
+      //   default() {
+      //     return []
+      //   }
+      // }
     },
     data() {
       return {
@@ -55,17 +61,35 @@
         totalWidth: 0, // swiper的宽度
         swiperStyle: {}, // swiper样式是什么意思
         currentIndex: 1, // 当前的轮播图片的索引
-        scrolling: false //是否正在滚动
+        scrolling: false //是否正在滚动,
       }
     },
+    // watch: {
+    //   banner: {
+    //     handler() {
+    //       console.log('watch到变化')
+    //       console.log(this.banners.length)
+    //       if (this.banners.length) {
+    //         this.$nextTick(() => {
+    //           console.log('nextTick()')
+    //           this.handleDom()
+    //           this.startTimer()
+    //         })
+    //       }
+    //     },
+    //     immediate: true,
+    //     deep: true
+    //   }
+    // },
     mounted() {
-      //安装好后的钩子, 或者说是dom渲染好以后
-      setTimeout(() => {
+      //安装好后的钩子, 或者说是dom渲染到页面以后，此时可进行dom操作
+      // 时延设置100ms为什么有时候会出bug?经常出现indicator不出现、轮播失败的情况
+      this.$nextTick(() => {
         // 1. 操作dom,在前后添加Slide
         this.handleDom()
         // 2. 开启定时器
         this.startTimer()
-      }, 100)
+      })
     },
     methods: {
       /**
@@ -139,11 +163,10 @@
        */
       handleDom() {
         // 1. 获取要操作的元素
-        let swiperEl = document.querySelector('.swiper') // 匹配指定css选择器的第一个元素，所以传入的参数为选择器
-        //console.log(swiperEl) // 看看匹配到的是啥
-        let slidesEls = swiperEl.getElementsByClassName('slide') // swiperItem的插槽外包裹的div有 class="slide"
-        // 返回的是HTMLCollection(集合?数组？)
-        //console.log(slidesEls)
+        // 匹配指定css选择器的第一个元素，所以传入的参数为选择器
+        // console.log(swiperEl) // 看看匹配到的是啥
+        let swiperEl = document.querySelector('.swiper')
+        let slidesEls = swiperEl.getElementsByClassName('slide') // 返回的是HTMLCollection(集合?数组？) // swiperItem的插槽外包裹的div有 class="slide"
 
         // 2. 保存滑片个数
         this.slideCount = slidesEls.length
@@ -156,10 +179,12 @@
           swiperEl.append(cloneFirst)
           this.totalWidth = swiperEl.offsetWidth
           this.swiperStyle = swiperEl.style
-        }
 
-        // 4. 让swiper元素显示第一个（目前显示的是前面添加的最后一个元素）
-        this.setTransform(-this.totalWidth) // 右移一个滑片的宽度
+          // 4. 让swiper元素显示第一个（目前显示的是前面添加的最后一个元素）
+          this.setTransform(-this.totalWidth) // 右移一个滑片的宽度
+        } else {
+          return
+        }
       },
 
       /**
