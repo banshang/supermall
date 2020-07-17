@@ -47,13 +47,13 @@
         // 指示器是否显示，默认true
         type: Boolean,
         default: true
+      },
+      banners: {
+        type: Array,
+        default() {
+          return []
+        }
       }
-      // banners: {
-      //   type: Array,
-      //   default() {
-      //     return []
-      //   }
-      // }
     },
     data() {
       return {
@@ -64,32 +64,29 @@
         scrolling: false //是否正在滚动,
       }
     },
-    // watch: {
-    //   banner: {
-    //     handler() {
-    //       console.log('watch到变化')
-    //       console.log(this.banners.length)
-    //       if (this.banners.length) {
-    //         this.$nextTick(() => {
-    //           console.log('nextTick()')
-    //           this.handleDom()
-    //           this.startTimer()
-    //         })
-    //       }
-    //     },
-    //     immediate: true,
-    //     deep: true
-    //   }
-    // },
+    watch: {
+      // watch banners的变化。如果发生变化，调用回调函数
+      banners: {
+        handler() {
+          if (this.banners.length) {
+            //监听到变化以后，此时，数据发生了更新而DOM还没有更新，由于我们需要操作DOM，所以要等DOM更新完
+            this.$nextTick(() => {
+              this.handleDom()
+              this.startTimer()
+            })
+          }
+        }
+      }
+    },
     mounted() {
       //安装好后的钩子, 或者说是dom渲染到页面以后，此时可进行dom操作
       // 时延设置100ms为什么有时候会出bug?经常出现indicator不出现、轮播失败的情况
-      this.$nextTick(() => {
-        // 1. 操作dom,在前后添加Slide
-        this.handleDom()
-        // 2. 开启定时器
-        this.startTimer()
-      })
+      // this.$nextTick(() => {
+      // 1. 操作dom,在前后添加Slide
+      // this.handleDom()
+      // 2. 开启定时器
+      // this.startTimer()
+      // })
     },
     methods: {
       /**
