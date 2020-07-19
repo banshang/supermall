@@ -53,3 +53,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 14 完成 backToTop 组件
 
 ## 15 实现上拉加载更多
+
+## 16 下拉拉不动 bug 解决
+
+## 17 防抖与节流 debounce & throttle 使用防抖 debounce
+
+## 18 完善上拉加载更多

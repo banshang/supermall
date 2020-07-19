@@ -42,6 +42,7 @@
   import BackTop from 'components/content/backTop/BackTop'
 
   import { getHomeMultidata, getHomeGoods } from 'network/home'
+  import { debounce } from 'common/utils'
 
   export default {
     name: 'Home',
@@ -81,11 +82,19 @@
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
     },
+    mounted() {
+      const refresh = debounce(this.$refs.scroll.refresh, 500)
+      // 监听item中图片加载完成
+      this.$bus.$on('itemImageLoad', () => {
+        refresh()
+      })
+    },
 
     methods: {
       /**
        * 事件监听的相关方法
        */
+
       tabClick(index) {
         switch (index) {
           case 0:
@@ -126,9 +135,11 @@
         })
       },
       getHomeGoods(type) {
+        // getHomeGoods(type)是这里定义的， getHomeGoods(type, page)是在network/home.js里面定义的
         // 2. 请求商品数据
         const page = this.goods[type].page + 1
         getHomeGoods(type, page).then(res => {
+          // push(...res.data.list)相当于遍历list里面的元素，并将其一个个push进去
           this.goods[type].list.push(...res.data.list)
           this.goods[type].page += 1
           this.$refs.scroll.finishPullUp()
