@@ -20,7 +20,8 @@
       },
       pullUpLoad: {
         type: Boolean,
-        default: false
+        default: false,
+        threshold: -50
       }
     },
     data() {
@@ -59,6 +60,9 @@
       },
       refresh() {
         this.scroll && this.scroll.refresh && this.scroll.refresh()
+      },
+      getScrollY() {
+        return this.scroll ? this.scroll.y : 0
       }
     }
   }

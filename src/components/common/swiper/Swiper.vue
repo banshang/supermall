@@ -81,12 +81,12 @@
     mounted() {
       //安装好后的钩子, 或者说是dom渲染到页面以后，此时可进行dom操作
       // 时延设置100ms为什么有时候会出bug?经常出现indicator不出现、轮播失败的情况
-      // this.$nextTick(() => {
-      // 1. 操作dom,在前后添加Slide
-      // this.handleDom()
-      // 2. 开启定时器
-      // this.startTimer()
-      // })
+      // setTimeout(() => {
+      //   // 1. 操作dom,在前后添加Slide
+      //   this.handleDom()
+      //   // 2. 开启定时器
+      //   this.startTimer()
+      // }, 500)
     },
     methods: {
       /**

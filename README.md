@@ -59,3 +59,24 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 17 防抖与节流 debounce & throttle 使用防抖 debounce
 
 ## 18 完善上拉加载更多
+
+## 19 重做 tabControl 的吸顶效果
+
+### 这里有 bug：
+
+- 1.在移动到 tabControl 位置时，下面的内容会突然上移
+
+- 2.tabControl 虽然设置了 fixed，但是也随着 BetterScroll 一起滚出去了
+
+### 解决方案：
+
+#### 复制一份 tabControl（PlaceHolderTabControl）组件对象，当用户滚动到一定位置时，PlaceHolderTabControl 显示出来；没有滚动到一定位置时，将其隐藏起来
+
+## 20 详情页
+
+- 详情页顶部轮播图
+- 详情页详情信息
+- 详情页商家信息
+- 详情页图片
+- 详情页评论
+-

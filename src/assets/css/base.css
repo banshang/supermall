@@ -1,8 +1,9 @@
-@import "./normalize.css";
+@import './normalize.css';
 
 /* :root 伪类，匹配文档根元素
     在html中，根元素始终是HTML元素 */
-:root {    /* 定义变量 */
+:root {
+  /* 定义变量 */
   --color-text: #666;
   --color-high-text: #ff5777;
   --color-tint: #ff8198; /* tint表示整体的背景颜色 */
@@ -21,7 +22,8 @@
 }
 
 body {
-  font-family: "Helvetica Neue", Helvatica, "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvatica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
   user-select: none; /* 禁止用于鼠标在页面上选中文字/图片等 */
   -webkit-tap-highlight-color: transparent; /* webkit是safari的核 */
   background: var(--color-background);
@@ -52,4 +54,8 @@ a {
 
 .right {
   float: right;
+}
+
+[v-cloak] {
+  display: none;
 }
